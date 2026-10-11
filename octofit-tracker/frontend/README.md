@@ -1,16 +1,40 @@
-# React + Vite
+# OctoFit Tracker Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React 19 + Vite presentation tier. Navigation uses `react-router-dom`, styling uses Bootstrap.
 
-Currently, two official plugins are available:
+## Configuration
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The frontend reads the API location from Vite environment variables via `import.meta.env`.
 
-## React Compiler
+When running in GitHub Codespaces, `VITE_CODESPACE_NAME` **must be defined**, for example in
+`octofit-tracker/frontend/.env.local` (git-ignored; see `.env.example`):
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+VITE_CODESPACE_NAME=your-codespace-name
+```
 
-## Expanding the ESLint configuration
+In a Codespaces terminal the value is available as `$CODESPACE_NAME`:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+echo "VITE_CODESPACE_NAME=$CODESPACE_NAME" > octofit-tracker/frontend/.env.local
+```
+
+| `VITE_CODESPACE_NAME` | API base URL                                  |
+| --------------------- | --------------------------------------------- |
+| set                   | `https://<name>-8000.app.github.dev`          |
+| unset                 | `http://localhost:8000` (local development)   |
+
+Restart the Vite dev server after changing env files. The localhost fallback only works when the
+browser runs on the same machine as the API; in Codespaces, define `VITE_CODESPACE_NAME`.
+
+## API endpoints used
+
+`/api/activities/`, `/api/leaderboard/`, `/api/teams/`, `/api/users/`, `/api/workouts/`
+
+## Scripts
+
+```bash
+npm run dev --prefix octofit-tracker/frontend     # http://localhost:5173
+npm run build --prefix octofit-tracker/frontend
+npm run lint --prefix octofit-tracker/frontend
+```
