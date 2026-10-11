@@ -22,6 +22,7 @@ app.use(express.json());
 app.get('/api/health', (_request, response) => {
   response.json({
     status: 'ok',
+    apiBaseUrl,
     database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
   });
 });
